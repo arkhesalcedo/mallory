@@ -23,9 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $run = new \App\Customer;
-        $run->fetch('CA');
+        $total = \App\Customer::count();
 
-        return view('home');
+        return view('home', compact('total'));
     }
 }
