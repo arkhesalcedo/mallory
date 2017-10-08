@@ -30,6 +30,20 @@ class HomeController extends Controller
         return view('home', compact('jobs'));
     }
 
+    public function customersPerMonth()
+    {
+        $jobs = \App\Job::all();
+
+        return view('customers', compact('jobs'));
+    }
+
+    public function salesPerMonth()
+    {
+        $jobs = \App\Job::all();
+
+        return view('sales', compact('jobs'));
+    }
+
     public function export()
     {
         $range = request('range');
@@ -90,7 +104,22 @@ class HomeController extends Controller
         $result = [];
 
         foreach ($data as $row) {
-            $result[$row->month] = $row->total;
+            $result[date("F", mktime(0, 0, 0, $row->month, 1))] = $row->total;
+        }
+
+        return $result;
+    }
+
+    public function salesByMonth()
+    {
+        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, sum(shipping_amount) as total')
+            // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
+            ->whereStore(request('store'))->groupBy('month')->orderBy('month', 'ASC')->get();
+
+        $result = [];
+
+        foreach ($data as $row) {
+            $result[date("F", mktime(0, 0, 0, $row->month, 1))] = $row->total;
         }
 
         return $result;

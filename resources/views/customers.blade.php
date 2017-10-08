@@ -9,7 +9,11 @@
                 <div class="panel-heading">Stats</div>
 
                 <div class="panel-body">
-                    <mm-total></mm-total>
+                    <mm-graph url="/stats/customersByMonth" store="US" type="line" label="Number of US Customers Per Month (All Years)"></mm-graph>
+
+                    <mm-graph url="/stats/customersByMonth" store="CA" type="line" label="Number of CA Customers Per Month (All Years)" color="75, 192, 192"></mm-graph>
+
+                    <mm-graph url="/stats/customersByMonth" store="UK" type="line" label="Number of UK Customers Per Month (All Years)" color="153, 102, 255"></mm-graph>
                 </div>
             </div>
         </div>
