@@ -29,6 +29,18 @@ class Kernel extends ConsoleKernel
             
             $run->fetch('US');
         })->cron('*/3 * * * *');
+
+        $schedule->call(function() {
+            $run = new \App\Customer;
+            
+            $run->fetch('CA');
+        })->cron('*/4 * * * *');
+
+        $schedule->call(function() {
+            $run = new \App\Customer;
+            
+            $run->fetch('UK');
+        })->cron('*/5 * * * *');
     }
 
     /**

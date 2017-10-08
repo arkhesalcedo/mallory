@@ -24,11 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $total = \App\Customer::count();
-
         $jobs = \App\Job::all();
 
-        return view('home', compact('total', 'jobs'));
+        return view('home', compact('jobs'));
     }
 
     public function export()
@@ -54,5 +52,31 @@ class HomeController extends Controller
                 $sheet->fromArray($customers);
             });
         })->export('csv');
+    }
+
+    public function orders($amount = null)
+    {
+        if (request('amount') == true) {
+            return [
+                'us' => \App\Customer::whereStore('US')->sum('shipping_amount'),
+                'ca' => \App\Customer::whereStore('CA')->sum('shipping_amount'),
+                'uk' => \App\Customer::whereStore('UK')->sum('shipping_amount')
+            ];
+        }
+
+        return [
+            'us' => \App\Customer::whereStore('US')->sum('shipping_order_count'),
+            'ca' => \App\Customer::whereStore('CA')->sum('shipping_order_count'),
+            'uk' => \App\Customer::whereStore('UK')->sum('shipping_order_count')
+        ];
+    }
+
+    public function customers()
+    {
+        return [
+            'us' => \App\Customer::whereStore('US')->count(),
+            'ca' => \App\Customer::whereStore('CA')->count(),
+            'uk' => \App\Customer::whereStore('UK')->count()
+        ];
     }
 }
