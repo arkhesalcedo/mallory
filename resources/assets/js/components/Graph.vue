@@ -45,7 +45,10 @@
             color: {
                 default: '54, 162, 235'
             },
-            options: null
+
+            store: {
+                default: 'US'
+            }
         },
 
         methods: {
@@ -60,7 +63,6 @@
             },
 
             build() {
-                console.log(this);
                 this.chartData.type = this.type;
                 
                 this.chartData.data = {
@@ -81,7 +83,9 @@
             },
 
             fetchData() {
-                return axios.post(this.url, this.options);
+                return axios.post(this.url, {
+                    store: this.store
+                });
             },
 
             render(chartData) {

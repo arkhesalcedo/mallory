@@ -85,7 +85,7 @@ class HomeController extends Controller
     {
         $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, count(*) as total')
             // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
-            ->whereStore('US')->groupBy('month')->orderBy('month', 'ASC')->get();
+            ->whereStore(request('store'))->groupBy('month')->orderBy('month', 'ASC')->get();
 
         $result = [];
 
