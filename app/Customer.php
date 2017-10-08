@@ -57,7 +57,7 @@ class Customer extends Model
 		            $customer->shipping_address_1 = $order->getShippingAddress()['AddressLine1'];
 		            $customer->shipping_address_2 = $order->getShippingAddress()['AddressLine2'];
 		            $customer->shipping_address_3 = $order->getShippingAddress()['AddressLine3'];
-		            $customer->shipping_city = $order->getShippingAddress()['City'];
+		            $customer->shipping_city = substr($order->getShippingAddress()['City'], 0, 19);
 		            $customer->shipping_county = $order->getShippingAddress()['County'];
 		            $customer->shipping_district = $order->getShippingAddress()['District'];
 		            $customer->shipping_state_or_region = $order->getShippingAddress()['StateOrRegion'];

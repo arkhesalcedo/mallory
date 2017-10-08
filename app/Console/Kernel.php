@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
             $run = new \App\Customer;
             
             $run->fetch('US');
-        })->everyMinute();
+        })->everyFiveMinutes();
     }
 
     /**

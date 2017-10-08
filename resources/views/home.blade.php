@@ -26,6 +26,12 @@
                 <div class="panel-heading">Export</div>
 
                 <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-danger">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                     <form action="{{ route('export') }}" method="POST">
                         {{ csrf_field() }}
 
@@ -53,12 +59,6 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     Total: {{ $total }}
                 </div>
             </div>
