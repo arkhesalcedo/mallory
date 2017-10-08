@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Excel;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,29 @@ class HomeController extends Controller
     {
         $total = \App\Customer::count();
 
-        return view('home', compact('total'));
+        $jobs = \App\Job::all();
+
+        return view('home', compact('total', 'jobs'));
+    }
+
+    public function export()
+    {
+        $range = request('range');
+
+        $store = request('store');
+
+        $dates = explode(' - ', $range);
+
+        $filename = 'YEOUTH_CUSTOMERS_' . $store . '_' . str_replace(' - ', '_', $range);
+
+        $customers = \App\Customer::whereBetween('shipping_purchase_date', [\Carbon\Carbon::parse($dates[0])->toDateTimeString(), \Carbon\Carbon::parse($dates[1])->toDateTimeString()])->whereStore($store)->get();
+
+        Excel::create($filename, function($excel) use($customers){
+            $excel->setTitle('Customer List');
+
+            $excel->sheet('Sheet 1', function($sheet) use($customers) {
+                $sheet->fromArray($customers);
+            });
+        })->export('csv');
     }
 }
