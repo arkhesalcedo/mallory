@@ -61,6 +61,8 @@
                 <div class="panel-body">
                     <mm-total></mm-total>
                     <canvas id="total"></canvas>
+
+                    <mm-graph url="/stats/customersByMonth" type="line"></mm-graph>
                 </div>
             </div>
         </div>

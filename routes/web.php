@@ -24,3 +24,5 @@ Route::post('/export', 'HomeController@export')->name('export');
 Route::post('/stats/orders', 'HomeController@orders')->name('orders');
 
 Route::post('/stats/customers', 'HomeController@customers')->name('customers');
+
+Route::post('/stats/customersByMonth', 'HomeController@customersByMonth')->name('customersByMonth');

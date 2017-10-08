@@ -17,6 +17,8 @@ window.Vue = require('vue');
 
 Vue.component('mm-total', require('./components/Total.vue'));
 
+Vue.component('mm-graph', require('./components/Graph.vue'));
+
 const app = new Vue({
     el: '#app'
 });

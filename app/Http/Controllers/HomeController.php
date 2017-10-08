@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Excel;
+use DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -78,5 +79,20 @@ class HomeController extends Controller
             'ca' => \App\Customer::whereStore('CA')->count(),
             'uk' => \App\Customer::whereStore('UK')->count()
         ];
+    }
+
+    public function customersByMonth()
+    {
+        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, count(*) as total')
+            // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
+            ->whereStore('US')->groupBy('month')->orderBy('month', 'ASC')->get();
+
+        $result = [];
+
+        foreach ($data as $row) {
+            $result[$row->month] = $row->total;
+        }
+
+        return $result;
     }
 }

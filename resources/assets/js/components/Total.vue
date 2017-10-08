@@ -15,14 +15,20 @@
         <div class="row">
             <div class="col-sm-4 text-center">
                 <h3>$ {{ usTotalAmount | numbers }}</h3>
+                <h5>Orders: {{ usTotalOrders | numbers }}</h5>
+                <h5>Customers: {{ usTotalCustomers | numbers }}</h5>
                 <h5>US</h5>
             </div>
             <div class="col-sm-4 text-center">
                 <h3>$ {{ caTotalAmount | numbers }}</h3>
+                <h5>Orders: {{ caTotalOrders | numbers }}</h5>
+                <h5>Customers: {{ caTotalCustomers | numbers }}</h5>
                 <h5>CA</h5>
             </div>
             <div class="col-sm-4 text-center">
                 <h3>£ {{ ukTotalAmount | numbers }}</h3>
+                <h5>Orders: {{ ukTotalOrders | numbers }}</h5>
+                <h5>Customers: {{ ukTotalCustomers | numbers }}</h5>
                 <h5>UK</h5>
             </div>
         </div>
