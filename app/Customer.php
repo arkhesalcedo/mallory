@@ -79,7 +79,7 @@ class Customer extends Model
         }
 
         $job->store = $store;
-        $job->fetch_record_count = $count;
+        $job->fetch_record_count = $count > 254 ? 254 : $count;
         $job->successful = $success;
         $job->last_run = $success ? $end : $start->toDateTimeString();
         $job->save();
