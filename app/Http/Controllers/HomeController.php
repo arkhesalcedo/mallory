@@ -97,7 +97,7 @@ class HomeController extends Controller
 
     public function customersByMonth()
     {
-        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, count(*) as total')
+        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, AVG(id) as total')
             // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
             ->whereStore(request('store'))->groupBy('month')->orderBy('month', 'ASC')->get();
 
@@ -112,7 +112,7 @@ class HomeController extends Controller
 
     public function salesByMonth()
     {
-        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, sum(shipping_amount) as total')
+        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, AVG(shipping_amount) as total')
             // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
             ->whereStore(request('store'))->groupBy('month')->orderBy('month', 'ASC')->get();
 

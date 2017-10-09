@@ -9,11 +9,11 @@
                 <div class="panel-heading">Stats</div>
 
                 <div class="panel-body">
-                    <mm-graph url="/stats/salesByMonth" store="US" type="line" label="US Sales Per Month (All Years)"></mm-graph>
+                    <mm-graph url="/stats/salesByMonth" store="US" type="line" label="Average US Sales Per Month"></mm-graph>
 
-                    <mm-graph url="/stats/salesByMonth" store="CA" type="line" label="CA Sales Per Month (All Years)" color="75, 192, 192"></mm-graph>
+                    <mm-graph url="/stats/salesByMonth" store="CA" type="line" label="Average CA Sales Per Month" color="75, 192, 192"></mm-graph>
 
-                    <mm-graph url="/stats/salesByMonth" store="UK" type="line" label="UK Sales Per Month (All Years)" color="153, 102, 255"></mm-graph>
+                    <mm-graph url="/stats/salesByMonth" store="UK" type="line" label="Average UK Sales Per Month" color="153, 102, 255"></mm-graph>
                 </div>
             </div>
         </div>
