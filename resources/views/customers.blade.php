@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         @include('partials.side')
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="panel panel-default panel-info">
                 <div class="panel-heading">Stats</div>
 
