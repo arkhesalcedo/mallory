@@ -39,6 +39,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @auth
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><a href="{{ route('customersPerMonth') }}">Customers Per Month</a></li>
                             <li><a href="{{ route('salesPerMonth') }}">Sales Per Month</a></li>
                         @endauth

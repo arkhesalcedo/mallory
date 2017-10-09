@@ -97,14 +97,13 @@ class HomeController extends Controller
 
     public function customersByMonth()
     {
-        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, sum(shipping_order_count) as total')
-            // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
-            ->whereStore(request('store'))->groupBy('month')->orderBy('month', 'ASC')->get();
+        $data = \App\Customer::selectRaw('YEAR(shipping_purchase_date) as year, MONTH(shipping_purchase_date) as month, sum(shipping_order_count) as total')
+            ->whereStore(request('store'))->groupBy('year', 'month')->orderBy('year', 'month', 'ASC')->get();
 
         $result = [];
 
         foreach ($data as $row) {
-            $result[date("F", mktime(0, 0, 0, $row->month, 1))] = $row->total;
+            $result[date('M, Y', mktime(0, 0, 0, $row->month, 1, $row->year))] = $row->total;
         }
 
         return $result;
@@ -112,14 +111,13 @@ class HomeController extends Controller
 
     public function salesByMonth()
     {
-        $data = \App\Customer::selectRaw('MONTH(shipping_purchase_date) as month, sum(shipping_amount) as total')
-            // ->whereBetween('shipping_purchase_date', [\Carbon\Carbon::today('UTC')->startOfYear()->toDateTimeString(), \Carbon\Carbon::today('UTC')->endOfYear()->toDateTimeString()])
-            ->whereStore(request('store'))->groupBy('month')->orderBy('month', 'ASC')->get();
+        $data = \App\Customer::selectRaw('YEAR(shipping_purchase_date) as year, MONTH(shipping_purchase_date) as month, sum(shipping_amount) as total')
+            ->whereStore(request('store'))->groupBy('year', 'month')->orderBy('year', 'month', 'ASC')->get();
 
         $result = [];
 
         foreach ($data as $row) {
-            $result[date("F", mktime(0, 0, 0, $row->month, 1))] = $row->total;
+            $result[date('M, Y', mktime(0, 0, 0, $row->month, 1, $row->year))] = $row->total;
         }
 
         return $result;
