@@ -98,7 +98,7 @@ class HomeController extends Controller
     public function customersByMonth()
     {
         $data = \App\Customer::selectRaw('YEAR(shipping_purchase_date) as year, MONTH(shipping_purchase_date) as month, sum(shipping_order_count) as total')
-            ->whereStore(request('store'))->groupBy('year', 'month')->orderBy('year', 'month', 'ASC')->get();
+            ->whereStore(request('store'))->groupBy('year', 'month')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
 
         $result = [];
 
@@ -112,7 +112,7 @@ class HomeController extends Controller
     public function salesByMonth()
     {
         $data = \App\Customer::selectRaw('YEAR(shipping_purchase_date) as year, MONTH(shipping_purchase_date) as month, sum(shipping_amount) as total')
-            ->whereStore(request('store'))->groupBy('year', 'month')->orderBy('year', 'month', 'ASC')->get();
+            ->whereStore(request('store'))->groupBy('year', 'month')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
 
         $result = [];
 
