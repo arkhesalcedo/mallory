@@ -33,8 +33,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('CA');
-        })->cron('*/4 * * * *');
+            $run->fetch('CA', \Carbon\Carbon::today('UTC')->subDays(2));
+        })->twiceDaily(2, 3);
 
         $schedule->call(function() {
             $run = new \App\Customer;

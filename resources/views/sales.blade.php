@@ -5,8 +5,8 @@
     <div class="row">
         @include('partials.side')
         <div class="col-md-9">
-            <div class="panel panel-default panel-info">
-                <div class="panel-heading">Stats</div>
+            <div class="panel panel-default panel-primary">
+                <div class="panel-heading">Analytics</div>
 
                 <div class="panel-body">
                     <mm-graph url="/stats/salesByMonth" store="US" type="line" label="US Sales Per Month"></mm-graph>

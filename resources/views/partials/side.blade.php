@@ -10,14 +10,14 @@
                         <h4 class="list-group-item-heading">
                             {{ $job->store }}
                         </h4>
-                        <p class="list-group-item-text">Last Run: {{ \Carbon\Carbon::parse($job->last_run, 'UTC')->toDayDateTimeString() }}</p>
+                        <p class="list-group-item-text"><i>Last Run:</i><br>{{ \Carbon\Carbon::parse($job->last_run, 'UTC')->toDayDateTimeString() }}</p>
                     </li>
                 @endforeach
             </ul>
         </div>
     </div>
 
-    <div class="panel panel-default panel-success">
+    <div class="panel panel-default panel-info">
         <div class="panel-heading">Export</div>
 
         <div class="panel-body">
@@ -44,7 +44,7 @@
                     <input type="text" class="form-control" id="range" name="range">
                 </div>
                 
-                <button type="submit" class="btn btn-default pull-right btn-success">Download</button>
+                <button type="submit" class="btn btn-default pull-right btn-info">Download</button>
             </form>
         </div>
     </div>
