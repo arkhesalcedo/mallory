@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('CA', \Carbon\Carbon::today('UTC')->subDays(2));
+            $run->fetch('CA', \Carbon\Carbon::today('UTC')->subDays(2)->toDateTimeString());
         })->twiceDaily(2, 3);
 
         $schedule->call(function() {
