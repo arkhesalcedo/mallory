@@ -62,7 +62,7 @@ class Customer extends Model
 		            $customer->shipping_district = substr($order->getShippingAddress()['District'], 0, 19);
 		            $customer->shipping_state_or_region = substr($order->getShippingAddress()['StateOrRegion'], 0, 19);
 		            $customer->shipping_postal_code = substr($order->getShippingAddress()['PostalCode'], 0, 14);
-		            $customer->shipping_country_code = $order->getShippingAddress()['CountryCode'];
+		            $customer->shipping_country_code = $order->getShippingAddress()['CountryCode'] ?: $store;
 		            $customer->shipping_phone = $order->getShippingAddress()['Phone'];
 		            $customer->shipping_amount = $order->getOrderTotal()['Amount'];
 		            $customer->shipping_order_count = $order->getNumberOfItemsShipped();
