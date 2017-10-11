@@ -53,19 +53,19 @@ class Customer extends Model
 		            $customer->name = substr($order->getBuyerName(), 0, 49);
 		            $customer->store = $store;
 		            $customer->shipping_purchase_date = \Carbon\Carbon::parse($order->getPurchaseDate())->toDateTimeString();
-		            $customer->shipping_name = substr($order->getShippingAddress()['Name'], 0, 49);
-		            $customer->shipping_address_1 = substr($order->getShippingAddress()['AddressLine1'], 0, 49);
-		            $customer->shipping_address_2 = substr($order->getShippingAddress()['AddressLine2'], 0, 49);
-		            $customer->shipping_address_3 = substr($order->getShippingAddress()['AddressLine3'], 0, 49);
-		            $customer->shipping_city = substr($order->getShippingAddress()['City'], 0, 19);
-		            $customer->shipping_county = substr($order->getShippingAddress()['County'], 0, 19);
-		            $customer->shipping_district = substr($order->getShippingAddress()['District'], 0, 19);
-		            $customer->shipping_state_or_region = substr($order->getShippingAddress()['StateOrRegion'], 0, 19);
-		            $customer->shipping_postal_code = substr($order->getShippingAddress()['PostalCode'], 0, 14);
+		            $customer->shipping_name = substr($order->getShippingAddress()['Name'], 0, 49)?: '';
+		            $customer->shipping_address_1 = substr($order->getShippingAddress()['AddressLine1'], 0, 49) ?: '';
+		            $customer->shipping_address_2 = substr($order->getShippingAddress()['AddressLine2'], 0, 49) ?: '';
+		            $customer->shipping_address_3 = substr($order->getShippingAddress()['AddressLine3'], 0, 49) ?: '';
+		            $customer->shipping_city = substr($order->getShippingAddress()['City'], 0, 19) ?: '';
+		            $customer->shipping_county = substr($order->getShippingAddress()['County'], 0, 19) ?: '';
+		            $customer->shipping_district = substr($order->getShippingAddress()['District'], 0, 19) ?: '';
+		            $customer->shipping_state_or_region = substr($order->getShippingAddress()['StateOrRegion'], 0, 19) ?: '';
+		            $customer->shipping_postal_code = substr($order->getShippingAddress()['PostalCode'], 0, 14) ?: '';
 		            $customer->shipping_country_code = $order->getShippingAddress()['CountryCode'] ?: $store;
-		            $customer->shipping_phone = $order->getShippingAddress()['Phone'];
-		            $customer->shipping_amount = $order->getOrderTotal()['Amount'];
-		            $customer->shipping_order_count = $order->getNumberOfItemsShipped();
+		            $customer->shipping_phone = $order->getShippingAddress()['Phone'] ?: '';
+		            $customer->shipping_amount = $order->getOrderTotal()['Amount'] ?: 0.00;
+		            $customer->shipping_order_count = $order->getNumberOfItemsShipped() ?: 0;
 
 		            $customer->save();
 
