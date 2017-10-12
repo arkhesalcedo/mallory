@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
             $run = new \App\Customer;
             
             $run->fetch('US');
-        })->cron('*/3 * * * *');
+        })->cron('*/5 * * * *');
 
         $schedule->call(function() {
             $run = new \App\Customer;
@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
             $run = new \App\Customer;
             
             $run->fetch('UK');
-        })->cron('*/5 * * * *');
+        })->cron('*/3 * * * *');
     }
 
     /**
