@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
             $run = new \App\Customer;
             
             $run->fetch('UK');
-        })->cron('*/3 * * * *');
+        })->twiceDaily(4, 5);
     }
 
     /**
