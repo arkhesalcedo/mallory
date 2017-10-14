@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('US');
-        })->cron('*/5 * * * *');
+            $run->fetch('US', \Carbon\Carbon::today('UTC')->subDays(2)->toDateTimeString());
+        })->twiceDaily(0, 1);
 
         $schedule->call(function() {
             $run = new \App\Customer;
@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('UK');
+            $run->fetch('UK', \Carbon\Carbon::today('UTC')->subDays(2)->toDateTimeString());
         })->twiceDaily(4, 5);
     }
 
