@@ -27,19 +27,19 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('US', \Carbon\Carbon::today('UTC')->subDays(2)->toDateTimeString());
+            $run->fetch('US', \Carbon\Carbon::today('UTC')->subDays(5)->toDateTimeString());
         })->twiceDaily(0, 1);
 
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('CA', \Carbon\Carbon::today('UTC')->subDays(2)->toDateTimeString());
+            $run->fetch('CA', \Carbon\Carbon::today('UTC')->subDays(5)->toDateTimeString());
         })->twiceDaily(2, 3);
 
         $schedule->call(function() {
             $run = new \App\Customer;
             
-            $run->fetch('UK', \Carbon\Carbon::today('UTC')->subDays(2)->toDateTimeString());
+            $run->fetch('UK', \Carbon\Carbon::today('UTC')->subDays(5)->toDateTimeString());
         })->twiceDaily(4, 5);
     }
 

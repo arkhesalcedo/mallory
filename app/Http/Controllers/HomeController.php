@@ -54,7 +54,7 @@ class HomeController extends Controller
 
         $filename = 'YEOUTH_CUSTOMERS_' . $store . '_' . str_replace(' - ', '_', $range);
 
-        $customers = \App\Customer::whereBetween('shipping_purchase_date', [\Carbon\Carbon::parse($dates[0])->toDateTimeString(), \Carbon\Carbon::parse($dates[1])->toDateTimeString()])->whereStore($store)->get();
+        $customers = \App\Customer::whereBetween('shipping_purchase_date', [\Carbon\Carbon::parse($dates[0], 'PST')->timezone('UTC')->toDateTimeString(), \Carbon\Carbon::parse($dates[1], 'PST')->timezone('UTC')->toDateTimeString()])->whereStore($store)->get();
 
         if ($customers->count() == 0) {
             return redirect()->back()->with(['status' => 'No customers exported. please try again..']);
