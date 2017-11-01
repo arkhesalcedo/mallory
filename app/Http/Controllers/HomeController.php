@@ -69,11 +69,11 @@ class HomeController extends Controller
 
             $customers = $temp->filter(function ($value, $key) use($temp2Array) {
                 return ! $temp2Array->contains($value->name);
-            });
+            })->unique('name');
         } else {
             $temp = $customers->unique('name');
 
-            $customers = $customers->diffKeys($temp);
+            $customers = $customers->diffKeys($temp)->unique('name');
         }
 
         if ($customers->count() == 0) {
