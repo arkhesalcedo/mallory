@@ -64,7 +64,11 @@ class HomeController extends Controller
             $excel->setTitle('Customer List');
 
             $excel->sheet('Sheet 1', function($sheet) use($customers) {
-                $sheet->fromArray($customers);
+                \App\Customer::chunk(500, function ($customers) {
+                    foreach ($customers as $customer) {
+                        $sheet->fromArray($customer);
+                    }
+                });
             });
         })->export('csv');
     }
