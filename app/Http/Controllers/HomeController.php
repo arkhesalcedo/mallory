@@ -89,9 +89,9 @@ class HomeController extends Controller
     public function customers()
     {
         return [
-            'us' => \App\Customer::whereStore('US')->count(),
-            'ca' => \App\Customer::whereStore('CA')->count(),
-            'uk' => \App\Customer::whereStore('UK')->count()
+            'us' => \App\Customer::whereStore('US')->groupBy('name')->count(),
+            'ca' => \App\Customer::whereStore('CA')->groupBy('name')->count(),
+            'uk' => \App\Customer::whereStore('UK')->groupBy('name')->count()
         ];
     }
 
