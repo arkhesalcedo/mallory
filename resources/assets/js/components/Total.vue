@@ -7,7 +7,7 @@
             </div>
             <div class="col-sm-6 text-center">
                 <h2>{{ getTotalCustomers | numbers }}</h2>
-                <h4>CUSTOMERS</h4>
+                <h4>UNIQUE CUSTOMERS</h4>
             </div>
         </div>
         
@@ -16,19 +16,19 @@
             <div class="col-sm-4 text-center">
                 <h3>$ {{ usTotalAmount | numbers }}</h3>
                 <h5>Orders: {{ usTotalOrders | numbers }}</h5>
-                <h5>Customers: {{ usTotalCustomers | numbers }}</h5>
+                <h5>Unique Customers: {{ usTotalCustomers | numbers }}</h5>
                 <h5>US</h5>
             </div>
             <div class="col-sm-4 text-center">
                 <h3>$ {{ caTotalAmount | numbers }}</h3>
                 <h5>Orders: {{ caTotalOrders | numbers }}</h5>
-                <h5>Customers: {{ caTotalCustomers | numbers }}</h5>
+                <h5>Unique Customers: {{ caTotalCustomers | numbers }}</h5>
                 <h5>CA</h5>
             </div>
             <div class="col-sm-4 text-center">
                 <h3>£ {{ ukTotalAmount | numbers }}</h3>
                 <h5>Orders: {{ ukTotalOrders | numbers }}</h5>
-                <h5>Customers: {{ ukTotalCustomers | numbers }}</h5>
+                <h5>Unique Customers: {{ ukTotalCustomers | numbers }}</h5>
                 <h5>UK</h5>
             </div>
         </div>

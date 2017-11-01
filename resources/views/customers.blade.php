@@ -9,11 +9,11 @@
                 <div class="panel-heading">Analytics</div>
 
                 <div class="panel-body">
-                    <mm-graph url="/stats/customersByMonth" store="US" type="line" label="US Customers Per Month"></mm-graph>
+                    <mm-graph url="/stats/customersByMonth" store="US" type="line" label="US Unique Customers Per Month"></mm-graph>
 
-                    <mm-graph url="/stats/customersByMonth" store="CA" type="line" label="CA Customers Per Month" color="75, 192, 192"></mm-graph>
+                    <mm-graph url="/stats/customersByMonth" store="CA" type="line" label="CA Unique Customers Per Month" color="75, 192, 192"></mm-graph>
 
-                    <mm-graph url="/stats/customersByMonth" store="UK" type="line" label="UK Customers Per Month" color="153, 102, 255"></mm-graph>
+                    <mm-graph url="/stats/customersByMonth" store="UK" type="line" label="UK Unique Customers Per Month" color="153, 102, 255"></mm-graph>
                 </div>
             </div>
         </div>
