@@ -64,7 +64,7 @@ class HomeController extends Controller
             $excel->setTitle('Customer List');
 
             $excel->sheet('Sheet 1', function($sheet) use($customers) {
-                \App\Customer::chunk(500, function ($customers) {
+                \App\Customer::chunk(500, function($customers) use($sheet){
                     foreach ($customers as $customer) {
                         $sheet->fromArray($customer);
                     }
