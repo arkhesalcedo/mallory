@@ -40,6 +40,15 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="store">Select Type</label>
+                    <select class="form-control" name="type" id="type">
+                        <option value="All" selected>All Customers</option>
+                        <option value="Single">One-Time Customers</option>
+                        <option calue="Repeat">Repeat Customers</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="range">Select Date Range</label>
                     <input type="text" class="form-control" id="range" name="range">
                 </div>

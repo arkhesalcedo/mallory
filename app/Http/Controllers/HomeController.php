@@ -52,11 +52,29 @@ class HomeController extends Controller
 
         $dates = explode(' - ', $range);
 
+        $type = request('type');
+
         $filename = 'YEOUTH_CUSTOMERS_' . $store . '_' . str_replace(' - ', '_', $range);
 
         $customers = \App\Customer::whereBetween('shipping_purchase_date', [\Carbon\Carbon::parse($dates[0], 'PST')->timezone('UTC')->toDateTimeString(), \Carbon\Carbon::parse($dates[1], 'PST')->timezone('UTC')->toDateTimeString()])->whereStore($store)->get(['name']);
 
-        $customers = $customers->unique('name');
+        if ($type == 'All') {
+            $customers = $customers->unique('name');
+        } else if ($type == 'Single') {
+            $temp = $customers->unique('name');
+
+            $temp2 = $customers->diffKeys($temp);
+
+            $temp2Array = collect($temp2->toArray())->flatten(1);
+
+            $customers = $temp->filter(function ($value, $key) use($temp2Array) {
+                return ! $temp2Array->contains($value->name);
+            });
+        } else {
+            $temp = $customers->unique('name');
+
+            $customers = $customers->diffKeys($temp);
+        }
 
         if ($customers->count() == 0) {
             return redirect()->back()->with(['status' => 'No customers exported. please try again..']);
@@ -71,7 +89,6 @@ class HomeController extends Controller
                         $sheet->appendRow($data->toArray());
                     }
                 }
-                // $sheet->fromArray($customers);
             });
         })->export('csv');
     }
