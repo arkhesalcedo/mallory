@@ -56,7 +56,9 @@ class HomeController extends Controller
 
         $filename = 'YEOUTH_CUSTOMERS_' . $store . '_' . str_replace(' - ', '_', $range);
 
-        $customers = \App\Customer::whereBetween('shipping_purchase_date', [\Carbon\Carbon::parse($dates[0], 'PST')->timezone('UTC')->toDateTimeString(), \Carbon\Carbon::parse($dates[1], 'PST')->timezone('UTC')->toDateTimeString()])->whereStore($store)->get(['name']);
+        $headers = ['name', 'shipping_name', 'shipping_phone', 'shipping_address_2', 'shipping_address_3', 'shipping_district', 'shipping_county', 'shipping_city', 'shipping_state_or_region', 'shipping_postal_code', 'shipping_country_code', 'shipping_amount', 'shipping_order_count', 'shipping_purchase_date'];
+
+        $customers = \App\Customer::whereBetween('shipping_purchase_date', [\Carbon\Carbon::parse($dates[0], 'PST')->timezone('UTC')->toDateTimeString(), \Carbon\Carbon::parse($dates[1], 'PST')->timezone('UTC')->toDateTimeString()])->whereStore($store)->get($headers);
 
         if ($type == 'All') {
             $customers = $customers->unique('name');
@@ -80,10 +82,12 @@ class HomeController extends Controller
             return redirect()->back()->with(['status' => 'No customers exported. please try again..']);
         }
 
-        Excel::create($filename, function($excel) use($customers){
+        Excel::create($filename, function($excel) use($customers, $headers){
             $excel->setTitle('Customer List');
 
-            $excel->sheet('Sheet 1', function($sheet) use($customers) {
+            $excel->sheet('Sheet 1', function($sheet) use($customers, $headers) {
+                $sheet->appendRow($headers);
+                
                 foreach ($customers->chunk(500) as $customer) {
                     foreach ($customer as $data) {
                         $sheet->appendRow($data->toArray());
